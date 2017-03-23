@@ -1,2 +1,7 @@
 # files generated from vim
 *.swp
+*.swo
+*.swm
+
+# node module
+node_modules/**
