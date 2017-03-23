@@ -8,14 +8,18 @@ server.listen('8080');
 console.log('Server is running ...');
 open('http://localhost:8080');
 
+// Set configuration for template engine
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
-app.use('/static', express.static('public'));
+
+app.use('/assets', express.static('assets'));
+
+// Set controller
+app.use('/test-model', require('./controllers/test-model.js'));
+app.use('/test-api', require('./controllers/test-api.js'));
 
 app.get('/', function(request, response) {
-	response.render('main', { nav: 'about' });
+	response.render('main', {
+		nav: 'about'
+	});
 });
-
-app.use('/test-model', require('./controllers/test-model.js'));
-
-app.use('/test-api', require('./controllers/test-api.js'));
