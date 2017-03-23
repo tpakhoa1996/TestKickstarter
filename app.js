@@ -1,10 +1,12 @@
 var express = require('express'),
 	app = express(),
 	path = require('path'),
-	server = require('http').createServer(app);
+	server = require('http').createServer(app),
+	open = require('open');
 
 server.listen('8080');
 console.log('Server is running ...');
+open('http://localhost:8080');
 
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
