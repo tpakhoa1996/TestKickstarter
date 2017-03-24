@@ -6,12 +6,10 @@ var express = require('express'),
 
 server.listen('8080');
 console.log('Server is running ...');
-open('http://localhost:8080');
 
 // Set configuration for template engine
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
-
 app.use('/assets', express.static('assets'));
 
 // Set controller

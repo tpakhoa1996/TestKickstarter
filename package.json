@@ -13,9 +13,11 @@
   "author": "khoaphananhtran@gmail.com",
   "license": "ISC",
   "dependencies": {
+    "cheerio": "^0.22.0",
+    "crawler": "^1.0.3",
     "express": "^4.15.2",
-    "open": "0.0.5",
     "mongodb": "^2.2.24",
+    "open": "0.0.5",
     "pug": "^2.0.0-beta11"
   }
 }
