@@ -4,8 +4,8 @@ var express = require('express'),
 
 router.get('/', function(request, response) {
 	var project = { 
-		creator : 'strawberrystudio',
-		code : 'strawberry-ninja'
+		creator : 'projectcopper',
+		code : 'original-limited-edition-geometric-iceberg-paintin'
 	};
 
 	kickstarter.crawler.queue([{
@@ -15,8 +15,10 @@ router.get('/', function(request, response) {
 			if (err) {
 				console.log(err);
 			} else {
-				console.log(kickstarter.retrieveData(res));
+				data = kickstarter.retrieveData(res);
+				console.log(data);
 				response.render('test-api', {
+					data: data,
 					nav : 'api'
 				});
 			}
