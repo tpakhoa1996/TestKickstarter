@@ -5,7 +5,7 @@ var map_currency = {"AED":"AED","AFN":"؋","ALL":"Lek","AMD":"AMD","AOA":"AOA","
 
 module.exports.getUrl = function (data) {
 	var url = 'https://www.kickstarter.com/projects/';
-	return url + data.creator + '/' + data.code;
+	return url + data.projectCreator + '/' + data.code;
 }
 
 module.exports.crawler = new crawler({
@@ -13,53 +13,42 @@ module.exports.crawler = new crawler({
 	maxConnections: 10
 });
 
-// Crawling data:
-// status: live | successful | failed
-// title
-// creator
-// posters
-// backers_number
-// images: contains links of images in project description
-// goal
-// pledged
-// currency: notation of currency used in the project
-// description
-// category
+// Crawling data: information is crawled based on Project model
 
 module.exports.retrieveData = function(res) {
 	var data = {};
 	var $ = res.$;
-	data.status = $("#main_content").attr("class").slice(15);
-	if (data.status != 'successful') {
-		data.goal = $("#pledged").attr('data-goal');
-		data.pledged = $("#pledged").attr('data-pledged');
+	data.projectStatus = $("#main_content").attr("class").slice(15);
+	if (data.projectStatus != 'successful') {
+		data.projectGoal = $("#pledged").attr('data.projectGoal');
+		data.projectPledged = $("#pledged").attr('data.projectPledged');
 		var tmp = $("span.project_currency_code");
 		tmp.removeClass('money');
 		tmp.removeClass('project_currency_code');
-		data.currency = map_currency[tmp.attr('class').toUpperCase()];
-		data.title = $("h2.navy-700").text();
-		data.backers_number = $("#backers_count").attr("data-backers-count");
-		data.completion_date = $("[data-end_time]").attr("data-end_time");
+		data.projectCurrency = map_currency[tmp.attr('class').toUpperCase()];
+		data.projectTitle = $("h2.navy-700").text();
+		data.projectBackerNum = $("#backers_count").attr("data-backers-count");
 	} else {
 		var tmp = $(".money");
-		data.pledged = tmp.eq(1).text();
-		data.goal = tmp.eq(2).text();
-		data.currency = data.goal[0];
-		if ('0' <= data.currency && data.currency <= '9')
-			data.currency = data.goal.slice(-1);
-		data.goal = data.goal.replace(/\D/g, '');
-		data.pledged = data.pledged.replace(/\D/g, '');
-		data.backers_number = $("div.mb0 h3").text().replace(/\D/g, '');
-		data.title = $(".NS_project_profile__title .hero__link").text();
+		data.projectPledged = tmp.eq(1).text();
+		data.projectGoal = tmp.eq(2).text();
+		data.projectCurrency = data.projectGoal[0];
+		if ('0' <= data.projectCurrency && data.projectCurrency <= '9')
+			data.projectCurrency = data.projectGoal.slice(-1);
+		data.projectGoal = data.projectGoal.replace(/\D/g, '');
+		data.projectPledged = data.projectPledged.replace(/\D/g, '');
+		data.projectBackerNum = $("div.mb0 h3").text().replace(/\D/g, '');
+		data.projectTitle = $(".NS_project_profile__title .hero__link").text();
 	}
-	data.creator = $("a[data-modal-class='modal_project_by']:only-child").text().replace(/\n/g, '');
-	data.poster = $("img.poster").attr('src');
-	data.images = []
+	data.projectCompletionDate = $("[data-end_time]").attr("data-end_time");
+	data.projectCreator = $("a[data-modal-class='modal_project_by']:only-child").text().replace(/\n/g, '');
+	data.projectPoster = $("img.poster").attr('src');
+	data.projectImages = []
 	$(".full-description img").each(function(index, element) {
-		data.images.push($(element).attr('src'));
+		data.projectImages.push($(element).attr('src'));
 	});
-	data.description = $(".full-description").html();
-	data.category = $("div.NS_projects__category_location a").eq(1).text().replace(/\n/g, "");
-	data.title = data.title.slice(0, data.title.length >> 1).replace(/\n/g, '');
+	data.projectDescription = $(".full-description").html();
+	data.projectCategory = $("div.NS_projects__category_location a").eq(1).text().replace(/\n/g, "");
+	data.projectTitle = data.projectTitle.slice(0, data.projectTitle.length >> 1).replace(/\n/g, '');
 	return data;
 };

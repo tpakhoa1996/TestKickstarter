@@ -5,3 +5,4 @@
 
 # node module
 node_modules/**
+database/**

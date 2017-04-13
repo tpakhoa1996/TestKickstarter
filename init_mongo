@@ -1,0 +1,9 @@
+#!/bin/sh
+touch mongod_pid
+sudo rm -rd database
+mkdir database
+mongod --port 27017 --dbpath database --fork --logpath mongod_log --pidfilepath $(pwd)/mongod_pid
+mongo --port 27017 db_auth.js
+kill $(cat mongod_pid)
+rm mongod_log*
+rm mongod_pid

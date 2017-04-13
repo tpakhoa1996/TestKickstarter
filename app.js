@@ -1,23 +1,29 @@
-var express = require('express'),
+var express = require("express"),
 	app = express(),
-	path = require('path'),
-	server = require('http').createServer(app),
-	open = require('open');
+	path = require("path"),
+	server = require("http").createServer(app),
+	open = require("open"),
+	bodyParser = require("body-parser"),
+	mongoose = require('mongoose');
 
-server.listen('8080');
-console.log('Server is running ...');
+server.listen("8080");
+console.log("Server is running ...");
 
 // Set configuration for template engine
-app.set('view engine', 'pug');
-app.set('views', path.join(__dirname, 'views'));
-app.use('/assets', express.static('assets'));
+app.set("view engine", "pug");
+app.set("views", path.join(__dirname, "/views"));
+app.use("/assets", express.static("public"));
+app.use(bodyParser.urlencoded({extended: "true"}));
+
+// Connect to mongodb
+var dbOptions = {
+	server: { poolSize: 10 },
+	user: "dbAdmin",
+	pass: "123",
+};
+mongoose.connect("mongodb://localhost:27017/project", dbOptions);
 
 // Set controller
-app.use('/test-model', require('./controllers/test-model.js'));
-app.use('/test-api', require('./controllers/test-api.js'));
-
-app.get('/', function(request, response) {
-	response.render('main', {
-		nav: 'about'
-	});
-});
+app.use("/test-model", require("./routes/test-model.route.js"));
+app.use("/test-api", require("./routes/test-api.route.js"));
+app.use("/", require("./routes/home.route.js"));

@@ -1,0 +1,3 @@
+#!/bin/sh
+
+mongod --port 27017 --dbpath database

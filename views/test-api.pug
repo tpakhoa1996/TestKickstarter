@@ -2,7 +2,30 @@ extends base.pug
 
 block head
 	link(rel="stylesheet" href="/assets/css/test-api.css")
+	title API
 
 block content
 	h3 Test API
-	p= data.title
+	.container-fluid
+		form(method="post")
+			.form-group
+				label( class = "sr-only")
+				input(
+					class = "form-control"
+					type = "text"
+					name = "link"
+					value = prev_search ? prev_search : ""
+					placeholder = "Input project link" 
+				)
+	
+			.text-center
+				button(
+					type = "submit"
+					class = "btn btn-primary"
+				)
+					| Get project information
+		.panel.panel-success
+			.panel-heading.text-center
+				h2= (data && ! data.error) ? data.projectTitle : "Project title"
+			.panel-body
+				!= data ? (data.error ? "Link not found!" : projectDescription) : ""
