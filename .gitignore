@@ -6,3 +6,9 @@
 # node module
 node_modules/**
 database/**
+
+# mongo file
+mongo*
+
+# log file
+*.log

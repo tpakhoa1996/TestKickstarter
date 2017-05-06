@@ -1,0 +1,4 @@
+#!/bin/sh
+kill $(cat mongod_pid)
+rm mongod_log*
+rm mongod_pid

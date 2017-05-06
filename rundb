@@ -1,0 +1,2 @@
+#!/bin/sh
+mongod --port 27017 --dbpath database --fork --logpath mongod_log --pidfilepath $(pwd)/mongod_pid
