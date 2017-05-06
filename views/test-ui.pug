@@ -1,7 +1,44 @@
 extends base.pug
 
 block head
-	link(rel="stylesheet" href="/assets/css/test-model.css")
+    link(rel="stylesheet" href="/assets/css/browse.css")
+    script(src="/assets/js/bundle.js")
+    title Test UI
 
 block content
-	h3 Testing UI
+    mixin card(text, percent, ...tags)
+        div.card
+            div.row
+                div.col-sm-9
+                    div.row
+                        div.col-sm-12
+                            div.title= text
+                        div.col-sm-12.category
+                            each tag in tags
+                                div.tag= tag
+                    div.row.main-image
+                        div.col-sm-12.image-container
+                            img(src='http://placehold.it/500x200' alt='Main image')
+                    div.row.sub-image
+                        - for (var i = 0; i < 4; i++) {
+                            div.col-sm-3.image-container
+                                img(src='http://placehold.it/500x500' alt='Sub image')
+                        - }
+                div.col-sm-3
+                    div.row.progress
+                        div.progress-bar(style={width:percent, background: 'red'})
+                            span= percent
+                    div.row.money
+                        div.col-sm-12
+                            p 80,000$ of 100,000$
+                    div.row.description
+                        div.col-sm-12
+                            p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+    
+    div.col-sm-12.view
+        +card('Cho Khoa', '40%', 'Boardgame', 'Tabletop', 'Multiplayer')
+        +card('Meo Khoa', '10%', 'Application', 'Mobile', 'Money Management')
+        +card('Su Tu Khoa', '100%', 'Devices', 'Desktop')
+        +card('Khi Khoa', '10%', 'Application', 'Mobile', 'Money Management')
+        +card('Cho Khoa', '40%', 'Boardgame', 'Single Player')
