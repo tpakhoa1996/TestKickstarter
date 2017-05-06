@@ -44,7 +44,7 @@ $(document).ready(function() {
         // left 37
         // right 39
         switch (event.which) {
-            case 37:
+            case 39:
                 var index = parseInt($(".far-right").attr('data'));
                 $(".view>div").each(function(index, el) {
                     var current = $(el).attr('position');
@@ -58,7 +58,7 @@ $(document).ready(function() {
                 $(".far-right").attr('data', dataObject["newIndex"]);
                 loadCard($(".far-right"), dataObject["data"]);
                 break;
-            case 39:
+            case 37:
                 var index = parseInt($(".far-left").attr('data'));
                 $(".view>div").each(function(index, el) {
                     var current = $(el).attr('position');
@@ -148,11 +148,26 @@ $(document).ready(function() {
             element.find(".pledged").text(symbol + pledged);
             element.find(".goal").text(symbol + goal);
 
+            // Card status
+            var status = toDisplayData["status"];
+            element.find(".fa").css('color', 'black');
+            if (status) {
+                switch (status) {
+                    case "like":
+                        element.find(".fa-thumbs-up").css('color', 'red');
+                        break;
+                    case "dislike":
+                        element.find(".fa-thumbs-down").css('color', 'red');
+                        break;
+                }
+            }
+
             element.fadeIn('400');
         });
     }
 
     $(".fa-thumbs-up").click(function(event) {
+        $(this).css('color', 'red');
         var link = $(".card.center").find("a").attr('href');
         $.ajax({
             url: '/test-user/like',
@@ -164,6 +179,7 @@ $(document).ready(function() {
     });
 
     $(".fa-thumbs-down").click(function(event) {
+        $(this).css('color', 'red');
         var link = $(".card.center").find("a").attr('href');
         $.ajax({
             url: '/test-user/dislike',
