@@ -32,4 +32,17 @@ exports.addWeight = (data) => {
 	return data;
 }
 
+// Status: like | dislike
+exports.addStatus = (data) => {
+	data.forEach((project, index) => {
+		let link = project.projectLink;
+		if (likeIdea.indexOf(link) >= 0)
+			project.status = 'like';
+		if (dislikeIdea.indexOf(link) >= 0)
+			project.status = 'dislike';
+		data[index] = project;
+	});
+	return data;
+};
+
 module.exports = exports;
