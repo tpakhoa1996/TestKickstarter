@@ -16,6 +16,7 @@ app.use("/assets", express.static("public"));
 app.use(bodyParser.urlencoded({extended: "true"}));
 
 // Set controller
+app.use("/test-ui", require("./routes/test-ui.route.js"));
 app.use("/test-model", require("./routes/test-model.route.js"));
 app.use("/test-api", require("./routes/test-api.route.js"));
 app.use("/", require("./routes/home.route.js"));
