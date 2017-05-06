@@ -1,28 +1,34 @@
+let tags = {};
+let likeIdea = [];
+let dislikeIdea = [];
+
 exports.displayName = "Brian Nguyen";
 
-exports.tags = {};
+exports.tags = tags;
 
-exports.likeIdea = [];
+exports.likeIdea = likeIdea;
 
-exports.dislikeIdea = [];
+exports.dislikeIdea = dislikeIdea;
 
 exports.addWeight = (data) => {
 	data.forEach((project, index) => {
-		project.weight = 50;
-		let extraWeight = 0;
-		if (project.projectCategory) {
+		project.weight = 0;
+		if (project.projectCategory.length > 0) {
 			let categoriesNum = 0;
 			project.projectCategory.forEach((tag) => {
-				extraWeight += 50;
+				project.weight += 50;
 				categoriesNum ++;
-				if (tags.tag)
-					extraWeight += tags.tag;
+				if (tags[tag])
+					project.weight += tags[tag];
 			});
-			project.weight += Math.round(extraWeight / categoriesNum);
+			project.weight = Math.round(project.weight / categoriesNum);
 		}
 		data[index] = project;
 	});
-	data.sort((u, v) => v.score - u.score);
+	data.sort((u, v) => v.weight - u.weight);
+	data.forEach((project) => {
+		console.log(project.weight);
+	});
 	return data;
 }
 
