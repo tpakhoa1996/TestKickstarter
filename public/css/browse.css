@@ -1,5 +1,4 @@
 .view {
-    height: 900px;
     width: 100%;
 }
 
@@ -14,7 +13,6 @@
 
 .card.far-left{
     position: absolute;
-    top: 40px;
     left: -25%;
     transform: scale(0.3);
     z-index: 5;
@@ -22,7 +20,6 @@
 
 .card.left {
     position: absolute;
-    top: 40px;
     left: -10%;
     transform: scale(0.6);
     z-index: 7;
@@ -30,7 +27,6 @@
 
 .card.center {
     position: absolute;
-    top: 40px;
     left: 50%;
     transform: translateX(-50%) scale(1);
     z-index: 10;
@@ -38,7 +34,6 @@
 
 .card.right {
     position: absolute;
-    top: 40px;
     right: -10%;
     transform: scale(0.6);
     z-index: 7;
@@ -52,6 +47,13 @@
     z-index: 5;
 }
 
+.title {
+    font-size: large;
+    font-family: Roboto;
+    font-weight: 700;
+    padding-bottom: 10px;
+}
+
 .category {
     margin-bottom: 10px;
 }
@@ -63,12 +65,29 @@
     background-color: yellow;
     border: solid thin #ccb7b7;
     border-radius: 5px;
+    text-transform: capitalize;
 }
 
-.sub-image {
+.sub-images {
     margin-top: 20px;
+    white-space: nowrap;
+    overflow-y: auto;
+    height: 150px !important;
+}
+
+.grid-item {
+    padding: 0 5px;
+    margin-bottom: 10px;
 }
 
 .image-container>img {
     width: 100%;
+}
+
+.description {
+    overflow-x: hidden;
+}
+
+.description * {
+    font-size: 14px !important;
 }

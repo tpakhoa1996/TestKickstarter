@@ -1,4 +1,4 @@
-var data = require('/assets/data.json');
+var data = require('../public/data/data.json');
 
 module.exports = {
     display: (request, response) => {

@@ -2,43 +2,49 @@ extends base.pug
 
 block head
     link(rel="stylesheet" href="/assets/css/browse.css")
+    link(rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css")
+    script(src="/assets/js/isotope.min.js")
+    script(src="/assets/js/imagesloaded.min.js")
     script(src="/assets/js/bundle.js")
     title Test UI
 
 block content
-    mixin card(text, percent, ...tags)
+    mixin card()
         div.card
             div.row
                 div.col-sm-9
                     div.row
-                        div.col-sm-12
-                            div.title= text
+                        div.col-sm-10
+                            div.title
+                        div.col-sm-1
+                            i.fa.fa-thumbs-up
+                        div.col-sm-1
+                            i.fa.fa-thumbs-down
                         div.col-sm-12.category
-                            each tag in tags
-                                div.tag= tag
                     div.row.main-image
                         div.col-sm-12.image-container
-                            img(src='http://placehold.it/500x200' alt='Main image')
-                    div.row.sub-image
-                        - for (var i = 0; i < 4; i++) {
-                            div.col-sm-3.image-container
-                                img(src='http://placehold.it/500x500' alt='Sub image')
-                        - }
+                            img(alt='Main image')
+                    div.row.sub-images.grid
                 div.col-sm-3
                     div.row.progress
-                        div.progress-bar(style={width:percent, background: 'red'})
-                            span= percent
+                        div.progress-bar(style={'min-width': '10%'})
                     div.row.money
-                        div.col-sm-12
-                            p 80,000$ of 100,000$
+                        p 
+                            span.pledged 
+                            |  of  
+                            | 
+                            span.goal
                     div.row.description
                         div.col-sm-12
                             p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
     
     div.col-sm-12.view
-        +card('Cho Khoa', '40%', 'Boardgame', 'Tabletop', 'Multiplayer')
-        +card('Meo Khoa', '10%', 'Application', 'Mobile', 'Money Management')
-        +card('Su Tu Khoa', '100%', 'Devices', 'Desktop')
-        +card('Khi Khoa', '10%', 'Application', 'Mobile', 'Money Management')
-        +card('Cho Khoa', '40%', 'Boardgame', 'Single Player')
+        +card()
+        +card()
+        +card()
+        +card()
+        +card()
+    
+    script.
+        var data=!{JSON.stringify(data)};
