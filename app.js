@@ -15,14 +15,6 @@ app.set("views", path.join(__dirname, "/views"));
 app.use("/assets", express.static("public"));
 app.use(bodyParser.urlencoded({extended: "true"}));
 
-// Connect to mongodb
-var dbOptions = {
-	server: { poolSize: 10 },
-	user: "dbAdmin",
-	pass: "123",
-};
-mongoose.connect("mongodb://localhost:27017/project", dbOptions);
-
 // Set controller
 app.use("/test-model", require("./routes/test-model.route.js"));
 app.use("/test-api", require("./routes/test-api.route.js"));
