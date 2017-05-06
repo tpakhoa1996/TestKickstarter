@@ -29,7 +29,7 @@ module.exports = {
 					console.log('Crawling ...');
 					let data = kickstarter.retrieveData(res);
 					data.projectLink = projectLink;
-					console.log(data.projectCompletionDate);
+					console.log(data);
 					response.render('test-api', {
 						data: data,
 						nav : 'api',
