@@ -54,6 +54,10 @@
     padding-bottom: 10px;
 }
 
+.fa {
+    cursor: pointer;
+}
+
 .category {
     margin-bottom: 10px;
 }
@@ -80,7 +84,7 @@
     margin-bottom: 10px;
 }
 
-.image-container>img {
+.image-container img {
     width: 100%;
 }
 

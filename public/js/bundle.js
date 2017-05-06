@@ -79,6 +79,9 @@ $(document).ready(function() {
 
     function loadCard(element, toDisplayData) {
         element.fadeOut('400', function() {
+            var url = toDisplayData["projectLink"];
+            element.find("a").attr('href', url);
+
             element.find(".title").text(toDisplayData["projectTitle"]);
             if (toDisplayData["projectPoster"] != undefined) {
                 element.find('.main-image img').attr('src', toDisplayData["projectPoster"]);
@@ -148,4 +151,26 @@ $(document).ready(function() {
             element.fadeIn('400');
         });
     }
+
+    $(".fa-thumbs-up").click(function(event) {
+        var link = $(".card.center").find("a").attr('href');
+        $.ajax({
+            url: '/test-user/like',
+            type: 'POST',
+            data: {
+                link: link
+            }
+        });
+    });
+
+    $(".fa-thumbs-down").click(function(event) {
+        var link = $(".card.center").find("a").attr('href');
+        $.ajax({
+            url: '/test-user/dislike',
+            type: 'POST',
+            data: {
+                link: link
+            }
+        });
+    });
 });
